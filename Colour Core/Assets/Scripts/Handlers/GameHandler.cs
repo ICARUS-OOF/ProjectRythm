@@ -90,7 +90,6 @@ namespace ColorCore
                 {
                     c = CorruptColour.Red;
                 }
-                Debug.Log(Rnd_Int);
                 return c;
             }
             #endregion
