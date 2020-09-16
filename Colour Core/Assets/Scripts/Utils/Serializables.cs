@@ -20,6 +20,15 @@ namespace ColorCore
             public float delay;
         }
         [System.Serializable]
+        public class TimedCorruptMovement
+        {
+            public GameObject objectToMove;
+            public Vector2 velocity;
+            public float delay;
+            public float duration;
+            public bool isMoving = false;
+        }
+        [System.Serializable]
         public class CorruptExplosion
         {
             public float delay;

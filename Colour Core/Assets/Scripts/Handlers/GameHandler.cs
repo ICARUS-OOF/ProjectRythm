@@ -1,6 +1,5 @@
 ﻿using ColorCore.Enumerations;
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ColorCore
@@ -32,14 +31,14 @@ namespace ColorCore
             #region Level Settings
             public CorruptColour playerCorruptColour;
             public string musicName, musicAuthor;
-            public TMP_Text nameText, authorText;
+            public Text nameText, authorText;
             #endregion
             #region Start Method
             private void Start()
             {
                 onChangeCorruptColour += OnChangeCorruptColour;
                 nameText.text = musicName;
-                authorText.text = musicAuthor;
+                authorText.text = "by " + musicAuthor;
             }
             #endregion
             #region Events

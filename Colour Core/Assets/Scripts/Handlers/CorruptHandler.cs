@@ -14,12 +14,17 @@ namespace ColorCore
         public class CorruptHandler : MonoBehaviour
         {
             public List<CorruptMovement> corrupts = new List<CorruptMovement>();
+            public List<TimedCorruptMovement> corruptsWithDuration = new List<TimedCorruptMovement>();
             public List<CorruptExplosion> explosions = new List<CorruptExplosion>();
             private void Start()
             {
                 for (int i = 0; i < corrupts.Count; i++)
                 {
                     StartCoroutine(TriggerCorrupt(corrupts[i]));
+                }
+                for (int i = 0; i < corruptsWithDuration.Count; i++)
+                {
+                    StartCoroutine(TriggerDurationCorrupt(corruptsWithDuration[i]));
                 }
                 for (int i = 0; i < explosions.Count; i++)
                 {
@@ -33,16 +38,49 @@ namespace ColorCore
                 data.objectToMove.SetActive(true);
                 for ( ; ; )
                 {
-                   data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
-                   foreach (Transform t in data.objectToMove.transform)
-                   {
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                    foreach (Transform t in data.objectToMove.transform)
+                    {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
                             t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
                         }
-                   }
+                    }
                     yield return null;
                 }
+            }
+            IEnumerator TriggerDurationCorrupt(TimedCorruptMovement data)
+            {
+                data.objectToMove.SetActive(false);
+                yield return new WaitForSeconds(data.delay);
+                data.objectToMove.SetActive(true);
+                data.isMoving = true;
+                StartCoroutine(ResetCorruptDuration(data));
+                while (data.isMoving)
+                {
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                    foreach (Transform t in data.objectToMove.transform)
+                    {
+                        if (t.GetComponent<Rigidbody2D>() != null)
+                        {
+                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                        }
+                    }
+                    yield return null;
+                }
+                data.objectToMove.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                foreach (Transform t in data.objectToMove.transform)
+                {
+                    if (t.GetComponent<Rigidbody2D>() != null)
+                    {
+                        t.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    }
+                }
+            }
+            IEnumerator ResetCorruptDuration(TimedCorruptMovement data)
+            {
+                yield return new WaitForSeconds(data.duration);
+                data.isMoving = false;
             }
             IEnumerator TriggerExplosion(CorruptExplosion data)
             {

@@ -22,14 +22,14 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 3.550000000000002
+    m_Start: 3.5
     m_ClipIn: 0
-    m_Asset: {fileID: -3309719037163903863}
-    m_Duration: 146.45
+    m_Asset: {fileID: -5648156227924565652}
+    m_Duration: 110.36666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: -5922136601033792216}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 1
+    m_EaseOutDuration: 3
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -81,7 +81,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
+    m_BlendOutCurveMode: 1
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
     m_Recordable: 0
@@ -89,14 +89,14 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Kubbi - Cascade
+    m_DisplayName: Krayzius & Brainstorm - Virtual Boy
   m_Markers:
     m_Objects: []
   m_TrackProperties:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
---- !u!114 &-3309719037163903863
+--- !u!114 &-5648156227924565652
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: ae8adb7e82aeb804b87aadf9b6c5a2c5, type: 3}
+  m_Clip: {fileID: 8300000, guid: b85577d33b9196c408317b90c4199492, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:

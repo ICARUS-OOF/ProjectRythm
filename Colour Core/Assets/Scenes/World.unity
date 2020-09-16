@@ -1212,8 +1212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.45
-  m_fontSizeBase: 0.45
+  m_fontSize: 0.3
+  m_fontSizeBase: 0.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6682,8 +6682,8 @@ MonoBehaviour:
   inner: {fileID: 216979104}
   ID: {fileID: 1103940883}
   transition: {fileID: 443087400}
-  musicName: Cascade
-  artist: Kubbi
+  musicName: Virtual Boy
+  artist: Krayzius & Brainstorm
 --- !u!1001 &1728418636
 PrefabInstance:
   m_ObjectHideFlags: 0
