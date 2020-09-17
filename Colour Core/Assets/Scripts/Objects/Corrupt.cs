@@ -1,11 +1,11 @@
-﻿using ColorCore.Data;
-using ColorCore.Enumerations;
-using ColorCore.Handlers;
+﻿using ColourCore.Data;
+using ColourCore.Enumerations;
+using ColourCore.Handlers;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Objects
     {

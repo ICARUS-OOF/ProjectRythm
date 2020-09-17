@@ -1,10 +1,10 @@
-﻿using ColorCore.Handlers;
+﻿using ColourCore.Handlers;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ColorCore
+namespace ColourCore
 {
     namespace Objects
     {

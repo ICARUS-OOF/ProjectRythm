@@ -1,8 +1,8 @@
-﻿using ColorCore.Handlers;
+﻿using ColourCore.Handlers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Data
     {

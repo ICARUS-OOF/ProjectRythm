@@ -1,13 +1,13 @@
-﻿using ColorCore.Enumerations;
-using ColorCore.Objects;
-using ColorCore.Serializables;
+﻿using ColourCore.Enumerations;
+using ColourCore.Objects;
+using ColourCore.Serializables;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace ColorCore
+namespace ColourCore
 {
     namespace Handlers
     {
@@ -87,7 +87,7 @@ namespace ColorCore
                 data.sender.SetActive(false);
                 yield return new WaitForSeconds(data.delay);
                 data.sender.SetActive(true);
-                CameraController.singleton.Shake(.4f, .2f);
+                CameraController.singleton.Shake(.2f, .2f);
                 for (int i = 0; i < data.rate; i++)
                 {
                     StartCoroutine(moveExplosionObj(data));
@@ -103,7 +103,7 @@ namespace ColorCore
                 obj.transform.Rotate(new Vector3(0f, 0f, Rnd_R));
                 for ( ; ; )
                 {
-                    obj.transform.Translate(obj.transform.up * Time.deltaTime * data.particleSpeed);
+                    obj.transform.Translate(obj.transform.up * Time.deltaTime * data.speed);
                     yield return null;
                 }
             }

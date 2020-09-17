@@ -1,8 +1,9 @@
-﻿using ColorCore.Enumerations;
+﻿using ColourCore.Enumerations;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Handlers
     {
@@ -30,8 +31,10 @@ namespace ColorCore
             #endregion
             #region Level Settings
             public CorruptColour playerCorruptColour;
+            [HideInInspector]
+            public AudioSource Music;
             public string musicName, musicAuthor;
-            public Text nameText, authorText;
+            public TMP_Text nameText, authorText;
             #endregion
             #region Start Method
             private void Start()
@@ -39,6 +42,7 @@ namespace ColorCore
                 onChangeCorruptColour += OnChangeCorruptColour;
                 nameText.text = musicName;
                 authorText.text = "by " + musicAuthor;
+                Music = GetComponent<AudioSource>();
             }
             #endregion
             #region Events

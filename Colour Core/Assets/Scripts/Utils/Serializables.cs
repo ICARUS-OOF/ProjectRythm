@@ -1,8 +1,8 @@
-﻿using ColorCore.Enumerations;
-using ColorCore.Objects;
+﻿using ColourCore.Enumerations;
+using ColourCore.Objects;
 using System.Collections.Generic;
 using UnityEngine;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Serializables
     {
@@ -32,8 +32,8 @@ namespace ColorCore
         public class CorruptExplosion
         {
             public float delay;
-            public float rate;
-            public float particleSpeed = 5f;
+            public int rate = 5;
+            public float speed = 5f;
             public GameObject prefab;
             public GameObject sender;
         }

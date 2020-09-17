@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Objects
     {

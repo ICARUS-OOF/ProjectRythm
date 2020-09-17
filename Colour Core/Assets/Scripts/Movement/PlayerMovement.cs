@@ -1,9 +1,9 @@
-﻿using ColorCore.Data;
-using ColorCore.Handlers;
+﻿using ColourCore.Data;
+using ColourCore.Handlers;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace ColorCore
+namespace ColourCore
 {
     namespace Movement
     {

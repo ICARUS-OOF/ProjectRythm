@@ -1,7 +1,7 @@
-﻿using ColorCore.Serializables;
+﻿using ColourCore.Serializables;
 using UnityEngine;
 using System.Collections.Generic;
-namespace ColorCore
+namespace ColourCore
 {
     namespace Handlers
     {
