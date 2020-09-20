@@ -17,5 +17,11 @@ namespace ColourCore
             Red,
             Blue
         }
+        public enum PanelType
+        {
+            Menu,
+            Options,
+            Select
+        }
     }
 }

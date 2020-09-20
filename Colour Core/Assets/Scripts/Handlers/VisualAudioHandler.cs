@@ -40,7 +40,13 @@ namespace ColourCore
 				{
 					float[] spectrum = new float[numberOfSamples];
 
-					GameHandler.singleton.Music.GetSpectrumData(spectrum, 0, fftWindow);
+					if (GameHandler.singleton != null)
+					{
+						GameHandler.singleton.Music.GetSpectrumData(spectrum, 0, fftWindow);
+					} else
+					{
+						GetComponent<AudioSource>().GetSpectrumData(spectrum, 0, fftWindow);
+					}
 
 					for (int i = 0; i < audioSpectrumObjects.Length; i++)
 					{
