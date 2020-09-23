@@ -32,6 +32,16 @@ namespace ColourCore
             #region Preferences
             public float volume = 1f;
             #endregion
+            #region Properties
+            public string previousRootScene = "";
+            #endregion
+            #region Start
+            private void Start()
+            {
+                SceneManager.sceneLoaded += OnSceneLoaded;
+                OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+            }
+            #endregion
             #region LateUpdate Method
             private void LateUpdate()
             {
@@ -40,7 +50,16 @@ namespace ColourCore
                     volume = MenuHandler.singleton.volumeSlider.value;
                 }
                 SetAudioVolume();
-
+            }
+            #endregion
+            #region Event Subscribers
+            void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+            {
+                Time.timeScale = 1f;
+                if (GameHandler.singleton == null)
+                {
+                    previousRootScene = scene.name;
+                }
             }
             #endregion
             #region Util Methods
@@ -51,6 +70,28 @@ namespace ColourCore
                 {
                     sources[i].volume = volume / 2;
                 }
+            }
+            public IEnumerator LerpTimescale(float _time)
+            {
+                for ( ; ; )
+                {
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, _time, Time.unscaledDeltaTime * 4f);
+                    for (int i = 0; i < GetAudioSources().Length; i++)
+                    {
+                        GetAudioSources()[i].pitch = Mathf.Lerp(GetAudioSources()[i].pitch, _time, Time.unscaledDeltaTime * 3f);
+                    }
+                    yield return null;
+                }
+            }
+            public AudioSource[] GetAudioSources()
+            {
+                return FindObjectsOfType<AudioSource>();
+            }
+            #endregion
+            #region Static Utils Methods
+            public static void ReloadScene()
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             #endregion
         }

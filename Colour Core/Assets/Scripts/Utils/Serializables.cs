@@ -27,6 +27,7 @@ namespace ColourCore
             public float delay;
             public float duration;
             public bool isMoving = false;
+            public bool LerpZeroOnFinish = false;
         }
         [System.Serializable]
         public class CorruptExplosion

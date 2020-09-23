@@ -40,7 +40,7 @@ namespace ColourCore
 
                         if (Input.GetKeyDown(KeyCode.Space))
                         {
-                            StartCoroutine(OnEnterEnterLevel());
+                            StartCoroutine(OnEnterLevel());
                         }
                         return;
                     }
@@ -50,7 +50,7 @@ namespace ColourCore
                 mainSprite.transform.localScale = Vector3.Lerp(mainSprite.transform.localScale, new Vector3(1f, 1f), GameHandler.LevelExpandSpeed * Time.deltaTime);
                 ID.transform.localScale = Vector3.Lerp(ID.transform.localScale, new Vector3(0f, 1f, 2f), GameHandler.LevelIDExpandSpeed * Time.deltaTime);
             }
-            IEnumerator OnEnterEnterLevel()
+            IEnumerator OnEnterLevel()
             {
                 SoundHandler.singleton.PlaySound("Select 1");
                 transition.SetActive(true);

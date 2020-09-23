@@ -35,9 +35,9 @@ namespace ColourCore
                 }
                 return _sound;
             }
-            public void PlaySound(string _name)
+            public void PlaySound(string _name, float volume = 1f)
             {
-                source.PlayOneShot(GetSoundEffect(_name).clip);
+                source.PlayOneShot(GetSoundEffect(_name).clip, volume);
             }
         }
     }

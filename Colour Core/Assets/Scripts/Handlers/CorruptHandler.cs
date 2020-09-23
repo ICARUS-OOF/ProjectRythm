@@ -38,12 +38,12 @@ namespace ColourCore
                 data.objectToMove.SetActive(true);
                 for ( ; ; )
                 {
-                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
                     foreach (Transform t in data.objectToMove.transform)
                     {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
-                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
                         }
                     }
                     yield return null;
@@ -58,12 +58,12 @@ namespace ColourCore
                 StartCoroutine(ResetCorruptDuration(data));
                 while (data.isMoving)
                 {
-                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
                     foreach (Transform t in data.objectToMove.transform)
                     {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
-                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 6f);
+                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
                         }
                     }
                     yield return null;
@@ -75,6 +75,14 @@ namespace ColourCore
                     {
                         t.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     }
+                }
+                for ( ; ; )
+                {
+                    if (data.LerpZeroOnFinish)
+                    {
+                        data.objectToMove.transform.localScale = Vector2.Lerp(data.objectToMove.transform.localScale, Vector2.zero, Time.deltaTime * 10f);
+                    }
+                    yield return null;
                 }
             }
             IEnumerator ResetCorruptDuration(TimedCorruptMovement data)

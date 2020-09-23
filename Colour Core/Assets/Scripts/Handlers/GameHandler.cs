@@ -1,7 +1,11 @@
-﻿using ColourCore.Enumerations;
+﻿using ColourCore.Data;
+using ColourCore.Enumerations;
 using System;
+using System.Collections;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 namespace ColourCore
 {
@@ -29,33 +33,58 @@ namespace ColourCore
                 }
             }
             #endregion
-            #region Level Settings
+            #region Level Properties
             public CorruptColour playerCorruptColour;
+            public Animator transitionOut;
+            public float delay = 3.3f;
             [HideInInspector]
             public AudioSource Music;
             public string musicName, musicAuthor;
             public TMP_Text nameText, authorText;
+            public GameObject flashPanel;
             #endregion
             #region Start Method
             private void Start()
             {
                 onChangeCorruptColour += OnChangeCorruptColour;
+                onFinishLevel += OnFinishLevel;
                 nameText.text = musicName;
                 authorText.text = "by " + musicAuthor;
                 Music = GetComponent<AudioSource>();
+                StartCoroutine(StartMusic(delay));
             }
             #endregion
             #region Events
-            public EventHandler onChangeCorruptColour; 
+            public EventHandler onChangeCorruptColour;
+            public EventHandler onFinishLevel;
+            #endregion
+            #region Event Subscribers
             void OnChangeCorruptColour(object sender, EventArgs e)
             {
                 playerCorruptColour = GetOppositeCorruptColour(playerCorruptColour);
+            }
+            void OnFinishLevel(object sender, EventArgs e)
+            {
+                transitionOut.enabled = true;
+                StartCoroutine(LoadRootScene(2.2f));
+            }
+            #endregion
+            #region Main Methods
+            IEnumerator StartMusic(float _delay)
+            {
+                yield return new WaitForSeconds(_delay);
+                Music.Play();
             }
             #endregion
             #region Util Functions
             public void ChangeCorruptColour()
             {
                 onChangeCorruptColour?.Invoke(this, EventArgs.Empty);
+            }
+            IEnumerator LoadRootScene(float delay)
+            {
+                yield return new WaitForSeconds(delay);
+                SceneManager.LoadScene(GameMaster.singleton.previousRootScene);
             }
             #endregion
             #region Static Util Functions

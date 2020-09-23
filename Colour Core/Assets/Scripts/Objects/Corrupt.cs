@@ -21,9 +21,11 @@ namespace ColourCore
                 GameHandler handler = GameHandler.singleton;
                 if (col.transform.tag == "Player" && corruptColour != handler.playerCorruptColour)
                 {
+                    PlayerData data = col.GetComponent<PlayerData>();
+                    if (!data.canDamage)
+                    { return; }
                     GameObject particles = Instantiate(GameHandler.singleton.hitParticles, col.transform.position + new Vector3(0, 0, -1f), Quaternion.identity);
                     Destroy(particles, 3f);
-                    PlayerData data = col.GetComponent<PlayerData>();
                     StartCoroutine(DisableCollider());
                     data.Damage();
                 }
