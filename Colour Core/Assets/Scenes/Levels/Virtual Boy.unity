@@ -16501,6 +16501,7 @@ MonoBehaviour:
   playerCorruptColour: 0
   transitionOut: {fileID: 99170508}
   delay: 3.3
+  songDuration: 107
   Music: {fileID: 0}
   musicName: Virtual Boy
   musicAuthor: Krayzius & Brainstorm
@@ -16874,7 +16875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSpectrumObjects:
   - {fileID: 1127340337}
-  heightMultiplier: 1.2
+  heightMultiplier: 2
   numberOfSamples: 64
   fftWindow: 0
   lerpTime: 0.02
@@ -39463,7 +39464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877907602}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.8, y: -171.9, z: 0}
+  m_LocalPosition: {x: -0.8, y: -171.3, z: 0}
   m_LocalScale: {x: 0.29999995, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1304397272}

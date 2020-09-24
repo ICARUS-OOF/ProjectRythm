@@ -49,7 +49,6 @@ namespace ColourCore
                 {
                     volume = MenuHandler.singleton.volumeSlider.value;
                 }
-                SetAudioVolume();
             }
             #endregion
             #region Event Subscribers
@@ -59,6 +58,9 @@ namespace ColourCore
                 if (GameHandler.singleton == null)
                 {
                     previousRootScene = scene.name;
+                } else
+                {
+                    SetAudioVolume();
                 }
             }
             #endregion

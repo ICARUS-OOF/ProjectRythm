@@ -37,6 +37,7 @@ namespace ColourCore
             public CorruptColour playerCorruptColour;
             public Animator transitionOut;
             public float delay = 3.3f;
+            public float songDuration = 107f;
             [HideInInspector]
             public AudioSource Music;
             public string musicName, musicAuthor;
@@ -74,6 +75,7 @@ namespace ColourCore
             {
                 yield return new WaitForSeconds(_delay);
                 Music.Play();
+                StartCoroutine(AudioFadeOut(songDuration));
             }
             #endregion
             #region Util Functions
@@ -85,6 +87,16 @@ namespace ColourCore
             {
                 yield return new WaitForSeconds(delay);
                 SceneManager.LoadScene(GameMaster.singleton.previousRootScene);
+            }
+            public IEnumerator AudioFadeOut(float duration)
+            {
+                yield return new WaitForSeconds(duration);
+
+                while (Music.volume != 0)
+                {
+                    Music.volume = Mathf.Lerp(Music.volume, 0f, Time.deltaTime * 3f);
+                    yield return null;
+                }
             }
             #endregion
             #region Static Util Functions

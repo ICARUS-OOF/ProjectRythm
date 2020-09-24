@@ -38,12 +38,12 @@ namespace ColourCore
                 data.objectToMove.SetActive(true);
                 for ( ; ; )
                 {
-                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime * 1.2f);
                     foreach (Transform t in data.objectToMove.transform)
                     {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
-                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
+                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime * 1.2f);
                         }
                     }
                     yield return null;
@@ -58,12 +58,12 @@ namespace ColourCore
                 StartCoroutine(ResetCorruptDuration(data));
                 while (data.isMoving)
                 {
-                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime);
                     foreach (Transform t in data.objectToMove.transform)
                     {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
-                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.deltaTime * 4f);
+                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime);
                         }
                     }
                     yield return null;
@@ -80,7 +80,7 @@ namespace ColourCore
                 {
                     if (data.LerpZeroOnFinish)
                     {
-                        data.objectToMove.transform.localScale = Vector2.Lerp(data.objectToMove.transform.localScale, Vector2.zero, Time.deltaTime * 10f);
+                        data.objectToMove.transform.localScale = Vector2.Lerp(data.objectToMove.transform.localScale, Vector2.zero, Time.fixedDeltaTime);
                     }
                     yield return null;
                 }
@@ -111,7 +111,7 @@ namespace ColourCore
                 obj.transform.Rotate(new Vector3(0f, 0f, Rnd_R));
                 for ( ; ; )
                 {
-                    obj.transform.Translate(obj.transform.up * Time.deltaTime * data.speed);
+                    obj.transform.Translate(obj.transform.up * Time.fixedDeltaTime * data.speed * 0.1f);
                     yield return null;
                 }
             }
