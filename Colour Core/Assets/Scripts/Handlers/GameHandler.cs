@@ -23,7 +23,7 @@ namespace ColourCore
             #region Properties
             public GameObject hitParticles;
             #endregion
-            #region Singleton
+            #region Singleton and Awake Method
             public static GameHandler singleton;
             private void Awake()
             {
@@ -31,11 +31,16 @@ namespace ColourCore
                 {
                     singleton = this;
                 }
+                if (!autoPlay)
+                {
+                    GetComponent<CorruptHandler>().enabled = false;
+                }
             }
             #endregion
             #region Level Properties
             public CorruptColour playerCorruptColour;
             public Animator transitionOut;
+            public bool autoPlay = true;
             public float delay = 3.3f;
             public float songDuration = 107f;
             [HideInInspector]
@@ -52,7 +57,7 @@ namespace ColourCore
                 nameText.text = musicName;
                 authorText.text = "by " + musicAuthor;
                 Music = GetComponent<AudioSource>();
-                StartCoroutine(StartMusic(delay));
+                StartCoroutine(StartMusic(delay)); 
             }
             #endregion
             #region Events
@@ -73,7 +78,19 @@ namespace ColourCore
             #region Main Methods
             IEnumerator StartMusic(float _delay)
             {
+                if (!autoPlay)
+                {
+                    GetComponent<CorruptHandler>().enabled = true;
+                }
                 yield return new WaitForSeconds(_delay);
+                if (autoPlay)
+                {
+                    PlayMusic();
+                }
+            }
+            public void PlayMusic()
+            {
+                Debug.Log("Playing music...");
                 Music.Play();
                 StartCoroutine(AudioFadeOut(songDuration));
             }
@@ -83,7 +100,7 @@ namespace ColourCore
             {
                 onChangeCorruptColour?.Invoke(this, EventArgs.Empty);
             }
-            IEnumerator LoadRootScene(float delay)
+            public IEnumerator LoadRootScene(float delay)
             {
                 yield return new WaitForSeconds(delay);
                 SceneManager.LoadScene(GameMaster.singleton.previousRootScene);

@@ -5,9 +5,9 @@ namespace ColourCore
 {
     namespace Data
     {
-        public static class GameData
+        public class GameData
         {
-            
+
         }
     }
 }
