@@ -77,7 +77,7 @@ namespace ColourCore
             {
                 for ( ; ; )
                 {
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, _time, Time.unscaledDeltaTime * 4f);
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, _time, Time.fixedUnscaledDeltaTime * 4f);
                     for (int i = 0; i < GetAudioSources().Length; i++)
                     {
                         GetAudioSources()[i].pitch = Mathf.Lerp(GetAudioSources()[i].pitch, _time, Time.unscaledDeltaTime * 3f);

@@ -12,18 +12,24 @@ namespace ColourCore
         {
             [SerializeField] CorruptColour corruptColour;
             [SerializeField] GameObject shrinkObj;
+            bool isTriggered = false;
             private void LateUpdate()
             {
                 GetComponent<SpriteShapeRenderer>().color = GameHandler.GetCorrespondingColour(corruptColour);
             }
             private void OnTriggerStay2D(Collider2D col)
             {
+                if (isTriggered)
+                {
+                    return;
+                }
                 if (col.transform.tag == "Player")
                 {
                     if (corruptColour == GameHandler.singleton.playerCorruptColour)
                     {
                         StartCoroutine(shrink());
                         GameHandler.singleton.PlayMusic();
+                        isTriggered = true;
                     }
                 }
             }

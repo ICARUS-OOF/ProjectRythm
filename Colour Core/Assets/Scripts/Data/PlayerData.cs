@@ -1,4 +1,5 @@
 ﻿using ColourCore.Handlers;
+using ColourCore.Interfaces;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,13 +10,18 @@ namespace ColourCore
 {
     namespace Data
     {
-        public class PlayerData : MonoBehaviour
+        public class PlayerData : MonoBehaviour, IEntity
         {
-            [Header("Prime Variables")]
-            public bool canDamage = true;
-            public int Health = 4;
+            public bool canDamage { get; set; }
+            [SerializeField]
+            public int Health { get; set; }
             [Header("References")]
             public Slider healthBarSlider;
+            void Awake()
+            {
+                canDamage = true;
+                Health = 4;
+            }
             private void Start()
             {
                 healthBarSlider.maxValue = Health;

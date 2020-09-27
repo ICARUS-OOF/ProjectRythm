@@ -4,6 +4,7 @@ using ColourCore.Serializables;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -16,6 +17,7 @@ namespace ColourCore
             public List<CorruptMovement> corrupts = new List<CorruptMovement>();
             public List<TimedCorruptMovement> corruptsWithDuration = new List<TimedCorruptMovement>();
             public List<CorruptExplosion> explosions = new List<CorruptExplosion>();
+            public List<ObjectRotation> rotations = new List<ObjectRotation>();
             private void Start()
             {
                 for (int i = 0; i < corrupts.Count; i++)
@@ -30,6 +32,10 @@ namespace ColourCore
                 {
                     StartCoroutine(TriggerExplosion(explosions[i]));
                 }
+                for (int i = 0; i < rotations.Count; i++)
+                {
+                    StartCoroutine(handleObjectRotation(rotations[i]));
+                }
             }
             IEnumerator TriggerCorrupt(CorruptMovement data)
             {
@@ -38,12 +44,12 @@ namespace ColourCore
                 data.objectToMove.SetActive(true);
                 for ( ; ; )
                 {
-                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime * 1.2f);
+                    data.objectToMove.GetComponent<Rigidbody2D>().velocity = new Vector2(data.velocity.x * Time.fixedDeltaTime * 1.2f, data.velocity.y * Time.fixedDeltaTime * 1.2f);
                     foreach (Transform t in data.objectToMove.transform)
                     {
                         if (t.GetComponent<Rigidbody2D>() != null)
                         {
-                            t.GetComponent<Rigidbody2D>().velocity = (data.velocity * Time.fixedDeltaTime * 1.2f);
+                            t.GetComponent<Rigidbody2D>().velocity = new Vector2(data.velocity.x * Time.fixedDeltaTime * 1.2f, data.velocity.y * Time.fixedDeltaTime * 1.2f);
                         }
                     }
                     yield return null;
@@ -95,7 +101,10 @@ namespace ColourCore
                 data.sender.SetActive(false);
                 yield return new WaitForSeconds(data.delay);
                 data.sender.SetActive(true);
-                CameraController.singleton.Shake(.2f, .2f);
+                if (data.shake)
+                {
+                    CameraController.singleton.Shake(.2f, .2f);
+                }
                 for (int i = 0; i < data.rate; i++)
                 {
                     StartCoroutine(moveExplosionObj(data));
@@ -111,7 +120,20 @@ namespace ColourCore
                 obj.transform.Rotate(new Vector3(0f, 0f, Rnd_R));
                 for ( ; ; )
                 {
+                    yield return null;
+                    if (PlayerUI.singleton.isPaused)
+                    {
+                        continue;
+                    }
                     obj.transform.Translate(obj.transform.up * Time.fixedDeltaTime * data.speed * 0.1f);
+                }
+            }
+            IEnumerator handleObjectRotation(ObjectRotation data)
+            {
+                yield return new WaitForSeconds(data.delay);
+                for ( ; ; )
+                {
+                    data.objToRotate.transform.Rotate(new Vector3(0f, 0f, data.RotationValue * Time.fixedDeltaTime));
                     yield return null;
                 }
             }

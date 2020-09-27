@@ -12,6 +12,15 @@ namespace ColourCore
         public class Corrupt : MonoBehaviour
         {
             public CorruptColour corruptColour;
+            public float rotationVal = 0f;
+            [SerializeField] SpriteShapeRenderer spriteRenderer;
+            private void Start()
+            {
+                if (GetComponent<SpriteShapeRenderer>() != null)
+                {
+                    spriteRenderer = GetComponent<SpriteShapeRenderer>();
+                }
+            }
             private void OnTriggerStay2D(Collider2D col)
             {
                 if (!GetComponent<Collider2D>().enabled)
@@ -32,7 +41,7 @@ namespace ColourCore
             }
             private void Update()
             {
-                GetComponent<SpriteShapeRenderer>().color = GameHandler.GetCorrespondingColour(corruptColour);
+                spriteRenderer.color = GameHandler.GetCorrespondingColour(corruptColour);
             }
             IEnumerator DisableCollider()
             {

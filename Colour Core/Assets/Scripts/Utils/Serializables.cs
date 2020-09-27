@@ -35,8 +35,16 @@ namespace ColourCore
             public float delay;
             public int rate = 5;
             public float speed = 5f;
+            public bool shake = true;
             public GameObject prefab;
             public GameObject sender;
+        }
+        [System.Serializable]
+        public class ObjectRotation
+        {
+            public GameObject objToRotate;
+            public float delay;
+            public float RotationValue = 10f;
         }
     }
 }

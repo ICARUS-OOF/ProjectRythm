@@ -31,10 +31,6 @@ namespace ColourCore
                 {
                     singleton = this;
                 }
-                if (!autoPlay)
-                {
-                    GetComponent<CorruptHandler>().enabled = false;
-                }
             }
             #endregion
             #region Level Properties
@@ -45,7 +41,7 @@ namespace ColourCore
             public float songDuration = 107f;
             [HideInInspector]
             public AudioSource Music;
-            public string musicName, musicAuthor;
+            public string musicName, musicArtist;
             public TMP_Text nameText, authorText;
             public GameObject flashPanel;
             #endregion
@@ -55,9 +51,13 @@ namespace ColourCore
                 onChangeCorruptColour += OnChangeCorruptColour;
                 onFinishLevel += OnFinishLevel;
                 nameText.text = musicName;
-                authorText.text = "by " + musicAuthor;
+                authorText.text = "by " + musicArtist;
                 Music = GetComponent<AudioSource>();
-                StartCoroutine(StartMusic(delay)); 
+                StartCoroutine(StartMusic(delay));
+                if (!autoPlay)
+                {
+                    GetComponent<CorruptHandler>().enabled = false;
+                }
             }
             #endregion
             #region Events
@@ -78,10 +78,6 @@ namespace ColourCore
             #region Main Methods
             IEnumerator StartMusic(float _delay)
             {
-                if (!autoPlay)
-                {
-                    GetComponent<CorruptHandler>().enabled = true;
-                }
                 yield return new WaitForSeconds(_delay);
                 if (autoPlay)
                 {
@@ -91,6 +87,10 @@ namespace ColourCore
             public void PlayMusic()
             {
                 Debug.Log("Playing music...");
+                if (!autoPlay)
+                {
+                    GetComponent<CorruptHandler>().enabled = true;
+                }
                 Music.Play();
                 StartCoroutine(AudioFadeOut(songDuration));
             }
@@ -111,7 +111,7 @@ namespace ColourCore
 
                 while (Music.volume != 0)
                 {
-                    Music.volume = Mathf.Lerp(Music.volume, 0f, Time.deltaTime * 3f);
+                    Music.volume = Mathf.Lerp(Music.volume, 0f, Time.fixedUnscaledDeltaTime * 3f);
                     yield return null;
                 }
             }
