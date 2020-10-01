@@ -1,63 +1,53 @@
-﻿using ColourCore.Handlers;
+﻿using ColourCore.Enumerations;
+using ColourCore.Handlers;
 using System.Collections;
-using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-namespace ColourCore
+namespace ColourCore.Objects
 {
-    namespace Objects
+    public class Level : MonoBehaviour, IPointerEnterHandler
     {
-        public class Level : MonoBehaviour
+        public AudioClip musicClip;
+        public Text titleText, artistText;
+        public Image iconRef, strip;
+        public Sprite iconTexture;
+        public string title, artist;
+        public Difficulty difficulty;
+        public void Start()
         {
-            public TMP_Text titleText, artistText;
-            public GameObject mainSprite;
-            public GameObject inner;
-            public GameObject ID;
-            public GameObject transition;
-            public string musicName, artist;
-            private void Start()
+            titleText.text = title;
+            artistText.text = artist;
+            iconRef.sprite = iconTexture;
+            switch (difficulty)
             {
-                titleText.text = musicName;
-                artistText.text = artist;
-                ID.transform.localScale = new Vector3(0f, ID.transform.localScale.y, ID.transform.localScale.z);
-                inner.transform.localScale = new Vector3(0f, 0f, transform.localScale.z);
-
+                case Difficulty.Easy:
+                    strip.color = Color.green;
+                    break;
+                case Difficulty.Medium:
+                    strip.color = Color.yellow;
+                    break;
+                case Difficulty.Hard:
+                    strip.color = Color.red;
+                    break;
+                case Difficulty.Insane:
+                    strip.color = Color.magenta;
+                    break;
+                case Difficulty.Impossible:
+                    strip.color = Color.black;
+                    break;
             }
-            private void Update()
-            {
-                mainSprite.transform.Rotate(new Vector3(0f, 0f, GameHandler.LevelSpinSpeed * Time.deltaTime));
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GameHandler.levelRange);
-                foreach (Collider2D col in colliders)
-                {
-                    if (col.transform.tag == "Player")
-                    {
-                        inner.transform.localScale = Vector3.Lerp(inner.transform.localScale, new Vector3(0.5f, 0.5f, inner.transform.localScale.z), GameHandler.LevelExpandSpeed * Time.deltaTime);
-                        mainSprite.transform.localScale = Vector3.Lerp(mainSprite.transform.localScale, new Vector3(1.65f, 1.65f), GameHandler.LevelExpandSpeed * Time.deltaTime);
-
-                        ID.transform.localScale = Vector3.Lerp(ID.transform.localScale, new Vector3(2f, ID.transform.localScale.y), GameHandler.LevelIDExpandSpeed * Time.deltaTime);
-
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            StartCoroutine(OnEnterLevel());
-                        }
-                        return;
-                    }
-                }
-
-                inner.transform.localScale = Vector3.Lerp(inner.transform.localScale, new Vector3(0f, 0f, inner.transform.localScale.z), GameHandler.LevelExpandSpeed * Time.deltaTime);
-                mainSprite.transform.localScale = Vector3.Lerp(mainSprite.transform.localScale, new Vector3(1f, 1f), GameHandler.LevelExpandSpeed * Time.deltaTime);
-                ID.transform.localScale = Vector3.Lerp(ID.transform.localScale, new Vector3(0f, 1f, 2f), GameHandler.LevelIDExpandSpeed * Time.deltaTime);
-            }
-            IEnumerator OnEnterLevel()
-            {
-                SoundHandler.singleton.PlaySound("Select 1");
-                transition.SetActive(true);
-                yield return new WaitForSeconds(2f);
-                Debug.Log("Loading " + musicName + "...");
-                SceneManager.LoadScene(musicName);
-            }
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            MenuHandler.singleton.audioSource.clip = musicClip;
+            MenuHandler.singleton.audioSource.Play();
+        }
+        public void PlayLevel()
+        {
+            MenuHandler.singleton.SetLevelInspector(title, artist, iconTexture, difficulty);
         }
     }
 }

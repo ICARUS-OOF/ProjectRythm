@@ -4,43 +4,40 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace ColourCore
+namespace ColourCore.Movement
 {
-    namespace Movement
+    public class TutorialCorrupt : MonoBehaviour
     {
-        public class TutorialCorrupt : MonoBehaviour
+        [SerializeField] CorruptColour corruptColour;
+        [SerializeField] GameObject shrinkObj;
+        bool isTriggered = false;
+        private void LateUpdate()
         {
-            [SerializeField] CorruptColour corruptColour;
-            [SerializeField] GameObject shrinkObj;
-            bool isTriggered = false;
-            private void LateUpdate()
+            GetComponent<SpriteShapeRenderer>().color = GameHandler.GetCorrespondingColour(corruptColour);
+        }
+        private void OnTriggerStay2D(Collider2D col)
+        {
+            if (isTriggered)
             {
-                GetComponent<SpriteShapeRenderer>().color = GameHandler.GetCorrespondingColour(corruptColour);
+                return;
             }
-            private void OnTriggerStay2D(Collider2D col)
+            if (col.transform.tag == "Player")
             {
-                if (isTriggered)
+                if (corruptColour == GameHandler.singleton.playerCorruptColour)
                 {
-                    return;
-                }
-                if (col.transform.tag == "Player")
-                {
-                    if (corruptColour == GameHandler.singleton.playerCorruptColour)
-                    {
-                        StartCoroutine(shrink());
-                        GameHandler.singleton.PlayMusic();
-                        isTriggered = true;
-                    }
+                    StartCoroutine(shrink());
+                    GameHandler.singleton.PlayMusic();
+                    isTriggered = true;
                 }
             }
-            IEnumerator shrink()
+        }
+        IEnumerator shrink()
+        {
+            while (true)
             {
-                while (true)
-                {
-                    transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.fixedDeltaTime * 4f);
-                    shrinkObj.transform.localScale = Vector3.Lerp(shrinkObj.transform.localScale, Vector3.zero, Time.fixedDeltaTime * 4f);
-                    yield return null;
-                }
+                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.fixedDeltaTime * 2f);
+                shrinkObj.transform.localScale = Vector3.Lerp(shrinkObj.transform.localScale, Vector3.zero, Time.fixedDeltaTime * 2f);
+                yield return null;
             }
         }
     }

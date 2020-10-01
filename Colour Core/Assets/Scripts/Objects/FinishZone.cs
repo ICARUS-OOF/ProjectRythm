@@ -3,18 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace ColourCore
+namespace ColourCore.Objects
 {
-    namespace Objects
+    public class FinishZone : MonoBehaviour
     {
-        public class FinishZone : MonoBehaviour
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            private void OnTriggerEnter2D(Collider2D col)
+            if (col.transform.tag == "Player")
             {
-                if (col.transform.tag == "Player")
-                {
-                    GameHandler.singleton.onFinishLevel?.Invoke(this, EventArgs.Empty);
-                }
+                GameHandler.singleton.onFinishLevel?.Invoke(this, EventArgs.Empty);
             }
         }
     }

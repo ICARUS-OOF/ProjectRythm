@@ -2,53 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ColourCore
+namespace ColourCore.Handlers
 {
-    namespace Handlers
+    public class PlayerUI : MonoBehaviour
     {
-        public class PlayerUI : MonoBehaviour
+        #region Singleton
+        public static PlayerUI singleton;
+        private void Awake()
         {
-            #region Singleton
-            public static PlayerUI singleton;
-            private void Awake()
+            if (singleton == null)
             {
-                if (singleton == null)
-                {
-                    singleton = this;
-                }
+                singleton = this;
             }
-            #endregion
-            [Header("UI Variables")]
-            public bool isPaused = false;
-            [Header("References")]
-            public GameObject pauseMenuUI;
-            private void LateUpdate()
+        }
+        #endregion
+        [Header("UI Variables")]
+        public bool isPaused = false;
+        [Header("References")]
+        public GameObject pauseMenuUI;
+        private void LateUpdate()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    isPaused = !isPaused;
-                }
-                pauseMenuUI.SetActive(isPaused);
-                if (isPaused)
-                {
-                    GameHandler.singleton.Music.Pause();
-                    Time.timeScale = 0f;
-                } else
-                {
-                    GameHandler.singleton.Music.UnPause();
-                    Time.timeScale = 1f;
-                }
+                isPaused = !isPaused;
             }
-            public void Resume()
+            pauseMenuUI.SetActive(isPaused);
+            if (isPaused)
             {
-                isPaused = false;
+                GameHandler.singleton.Music.Pause();
+                Time.timeScale = 0f;
             }
-            public void Exit()
+            else
             {
-                isPaused = false;
+                GameHandler.singleton.Music.UnPause();
                 Time.timeScale = 1f;
-                StartCoroutine(GameHandler.singleton.LoadRootScene(0f));
             }
+        }
+        public void Resume()
+        {
+            isPaused = false;
+        }
+        public void Exit()
+        {
+            isPaused = false;
+            Time.timeScale = 1f;
+            StartCoroutine(GameHandler.singleton.LoadRootScene(0f));
         }
     }
 }

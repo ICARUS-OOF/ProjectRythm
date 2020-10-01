@@ -62,7 +62,7 @@ public class AudioVisualizer : MonoBehaviour {
 		
 	    if( Stimer > DesactivateAfter ){
 		    
-			gameObject.SetActive(false);
+			//gameObject.SetActive(false);
 	    }
 	}
 

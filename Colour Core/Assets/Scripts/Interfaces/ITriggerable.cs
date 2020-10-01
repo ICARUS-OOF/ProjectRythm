@@ -1,11 +1,8 @@
-﻿namespace ColourCore
+﻿namespace ColourCore.Interfaces
 {
-    namespace Interfaces
+    public interface ITriggerable
     {
-        public interface ITriggerable
-        {
-            bool isTriggered { get; set; }
-            void Trigger();
-        }
+        bool isTriggered { get; set; }
+        void Trigger();
     }
 }

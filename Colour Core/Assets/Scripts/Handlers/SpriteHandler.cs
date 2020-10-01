@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace ColourCore
+namespace ColourCore.Handlers
 {
-    namespace Handlers
+    public class SpriteHandler : MonoBehaviour
     {
-        public class SpriteHandler : MonoBehaviour
+        private void Update()
         {
-            private void Update()
-            {
-                SpriteRenderer[] renderers = FindObjectsOfType<SpriteRenderer>();
+            SpriteRenderer[] renderers = FindObjectsOfType<SpriteRenderer>();
 
-                foreach (SpriteRenderer renderer in renderers)
-                {
-                    renderer.sortingOrder = (int)(renderer.transform.position.y * -100f);
-                }
+            foreach (SpriteRenderer renderer in renderers)
+            {
+                renderer.sortingOrder = (int)(renderer.transform.position.y * -100f);
             }
         }
     }

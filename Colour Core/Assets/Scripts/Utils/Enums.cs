@@ -1,27 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace ColourCore
+namespace ColourCore.Enumerations
 {
-    namespace Enumerations
+    public enum Direction
     {
-        public enum Direction
-        {
-            Up,
-            Down, 
-            Left,
-            Right
-        }
-        public enum CorruptColour
-        {
-            Red,
-            Blue
-        }
-        public enum PanelType
-        {
-            Menu,
-            Options,
-            Select
-        }
+        Up,
+        Down,
+        Left,
+        Right
+    }
+    public enum CorruptColour
+    {
+        Red,
+        Blue
+    }
+    public enum PanelType
+    {
+        Menu,
+        Options,
+        Select,
+        LevelInspector
+    }
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard,
+        Insane,
+        Impossible
     }
 }

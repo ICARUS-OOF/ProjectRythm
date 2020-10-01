@@ -16357,12 +16357,6 @@ MonoBehaviour:
     duration: 2
     isMoving: 0
     LerpZeroOnFinish: 0
-  - objectToMove: {fileID: 1127340336}
-    velocity: {x: 0, y: 0}
-    delay: 70
-    duration: 7.3
-    isMoving: 0
-    LerpZeroOnFinish: 1
   - objectToMove: {fileID: 970477743}
     velocity: {x: 0, y: 0}
     delay: 63
@@ -16551,6 +16545,7 @@ MonoBehaviour:
     prefab: {fileID: 2752081725402884686, guid: cd21ac6a30d2f0c43a5459acb0db6ad2, type: 3}
     sender: {fileID: 970477743}
   rotations: []
+  objectEnablers: []
 --- !u!82 &857912430
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16676,10 +16671,13 @@ MonoBehaviour:
   numberOfSamples: 64
   fftWindow: 0
   lerpTime: 0.02
+  duration: 17
   Beating_X: 0
   Beating_Y: 1
   Beating_XY: 0
-  ActivateDelay: 77.5
+  ActivateDelay: 74
+  deactivateBeforeEnable: 1
+  autoActivate: 0
 --- !u!114 &857912432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16698,10 +16696,13 @@ MonoBehaviour:
   numberOfSamples: 64
   fftWindow: 0
   lerpTime: 0.02
+  duration: 17
   Beating_X: 1
   Beating_Y: 0
   Beating_XY: 0
-  ActivateDelay: 70
+  ActivateDelay: 29
+  deactivateBeforeEnable: 1
+  autoActivate: 0
 --- !u!1 &874832697
 GameObject:
   m_ObjectHideFlags: 0
@@ -20453,6 +20454,7 @@ Transform:
   - {fileID: 1304397272}
   - {fileID: 1536704532}
   - {fileID: 970477746}
+  - {fileID: 1127340337}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20970,12 +20972,12 @@ GameObject:
   - component: {fileID: 1127340341}
   - component: {fileID: 1127340342}
   m_Layer: 0
-  m_Name: Visualizer (12)
+  m_Name: Visualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1127340337
 Transform:
   m_ObjectHideFlags: 0
@@ -20987,8 +20989,8 @@ Transform:
   m_LocalPosition: {x: -11.51, y: 0.07, z: 11.21335}
   m_LocalScale: {x: 0.2351571, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 1536704532}
-  m_RootOrder: 12
+  m_Father: {fileID: 1061884981}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1127340338
 MonoBehaviour:
@@ -21082,7 +21084,7 @@ SpriteShapeRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127340336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
@@ -33840,6 +33842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1536704532}
+  - component: {fileID: 1536704533}
   m_Layer: 0
   m_Name: Visualizers
   m_TagString: Untagged
@@ -33870,10 +33873,30 @@ Transform:
   - {fileID: 234490517}
   - {fileID: 1223604691}
   - {fileID: 1695314687}
-  - {fileID: 1127340337}
   m_Father: {fileID: 1061884981}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1536704533
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536704531}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1567774548
 GameObject:
   m_ObjectHideFlags: 0

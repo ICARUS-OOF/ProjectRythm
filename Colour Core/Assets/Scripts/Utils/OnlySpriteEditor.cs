@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace ColourCore
+namespace ColourCore.Editor
 {
-    namespace Editor
+    public class OnlySpriteEditor : MonoBehaviour
     {
-        public class OnlySpriteEditor : MonoBehaviour
+        private void OnDrawGizmos()
         {
-            private void OnDrawGizmos()
-            {
-                GetComponent<SpriteShapeController>().enabled = true;
-            }
-            private void Start()
-            {
-                GetComponent<SpriteShapeController>().enabled = false;
-            }
+            GetComponent<SpriteShapeController>().enabled = true;
+        }
+        private void Start()
+        {
+            GetComponent<SpriteShapeController>().enabled = false;
         }
     }
 }
